@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+        <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+        <title>Editar</title>
+    
+      <nav class="navbar navbar-dark bg-dark">
+        
+        <ul class="nav nav-pills nav-fill">
+            <li class="nav-item">
+                <a class="nav-link" href="/Home">  Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/Crear">  Crear</a>
+              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/Unir">  Unir Nodos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"  href="/Lista">Lista Nodos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/VerDiapositiva">Iniciar Presentacion</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link"  href="/VerMatris">Matriz</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/UsarVis">Estructura</a>
+              </li>
+              
+      
+    </nav>
+            
+    </head>
+<body>
+    <br>
+    <div class="container">
+    <div class="form-group">
+        <form enctype="multipart/form-data" action="/GuardarInfo" method="POST">
+           <h3>Titulo:</h3>
+        {%if Titulo%}
+            <input type="text" class="form-control"  name ="Titulo" value="{{Titulo}}" >
+        {%else%}
+            <input type="text" class="form-control"  name ="Titulo">
+        {%endif%}
+            <h3>Texto:</h3>
+        {%if texto%}
+            <input type="text" class="form-control"  name ="Texto" value="{{texto}}" >
+        {%else%}
+            <input type="text" class="form-control"  name ="Texto">
+        {%endif%}
+        <br>
+        <h3>Fondo: </h3>
+        {%if fondo%}
+        <img class="rounded" height="250" width="250" src="{{ url_for('static', filename=fondo) }}" alt="" name="Fondo">
+        <br>
+        <label for="Fondo3">Seleccionar una imagen para el Fondo: </label><br>
+        <input type="file" name ="Fondo3">
+        <input type="text" name ="Fondo" value="{{fondo}}" hidden>
+        {%else%}
+        <label f>Seleccionar una imagen para el Fondo: </label><br>
+            <input type="file" name ="Fondo3">
+        {%endif%}
+        <br>
+        <h3>Imagen: </h3>
+        {%if imagen%}
+        <br>
+            <img height="250" class="rounded" width="250" src="{{ url_for('static', filename=imagen) }}" alt="" name="Imagen">
+            <br>
+        <br>
+        <label >Seleccionar una imagen a colocar en la diapositiva: </label><br>
+            <input type="file"  name ="Imagen3">
+            <input type="text" name ="Imagen" value="{{imagen}}" hidden>
+        {%else%}
+        <label for="Imagen3">Seleccionar una imagen a colocar en la diapositiva: </label><br>
+              <input type="file" name ="Imagen3">
+        {%endif%}
+        <input type="text"  name="Nombre" value="{{name}}" hidden>
+        {%if Primera== 0 %}
+        <h3>¿Esta es la primera Diapositiva?</h3>
+        <label for="Primera">Si</label>
+        <input type="checkbox" class="form-check-input"  value="1" name="Primera" id="Primera">
+        {%endif%}
+        {%if prima==1 %}
+        <h3>¿Esta es la primera Diapositiva?</h3>
+        <label for="Primera">Si</label>
+        <input type="checkbox" class="form-check-input"  value="1" name="Primera" id="Primers" checked>
+        {%endif%}
+        <br>
+        <input type="submit"  class="btn btn-primary" value="Guardar">
+        </form>
+    </div>
+</div>
+    
+    
+</body>
+</html>

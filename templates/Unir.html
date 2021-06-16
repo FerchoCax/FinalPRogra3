@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <title>Crear Uniones</title>
+
+  <nav class="navbar navbar-dark bg-dark">
+    
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link" href="/Home">  Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Crear">  Crear</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Unir">  Unir Nodos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="/Lista">Lista Nodos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/VerDiapositiva">Iniciar Presentacion</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  href="/VerMatris">Matriz</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/UsarVis">Estructura</a>
+          </li>
+          
+  
+</nav>
+        
+</head>
+<body>
+  <br>
+    <script>
+        function noiguales() {
+        valor = document.getElementById("nodo1").value;
+        valor1 = document.getElementById("nodo2").value;
+        if (valor1==valor) {
+        // Si no se cumple la condicion...
+        alert('No se puede conectar un nodo a si mismo.');
+        return false;
+        }else if(valor1!=valor){
+            
+            return true;
+        }
+        
+        }
+  
+    </script>
+    <div class="container">
+    <form action="/UnirNodos" name="nodos" method="POST" onsubmit="return noiguales()">
+      <h3>De:</h3>
+        <select name="nodo1" id="nodo1" class="form-control" >
+            {%if data%}
+            {%for nodo in data%}
+            <option value="{{nodo}}">{{nodo}}</option>
+            {%endfor%}
+            {%else%}
+            <option >Ya no hay mas opciones</option>
+            {%endif%}
+        </select>
+        <br>
+        <h3>A:</h3>
+        <select name="nodo2" id="nodo2" class="form-control" >
+            {%if data1%}
+            {%for nodo1 in data1%}
+            <option value="{{nodo1}}">{{nodo1}}</option>
+            {%endfor%}
+            {%else%}
+            <option >Ya no hay mas opciones</option>
+            {%endif%}
+        </select>
+        <br>
+        <input type="submit" class="btn btn-primary" value="Crear Union" >
+    </form>
+    <br>
+    <table class="table table-dark table-striped">
+      <thead >
+        <tr>
+          <td>Conexion</td>
+          <td>De:</td>
+          <td>A:</td>
+        </tr>
+      </thead>
+      <tbody>
+        {%if edge%}
+        {%for r in edge%}
+        <tr>
+          <td>{{r}}</td>
+          <td>{{r.0}}</td>
+          <td>{{r.1}}</td>
+        </tr>
+        {%endfor%}
+        
+        {%else%}
+        <td></td>
+        <td>No hay conexiones</td>
+        <td></td>
+        {%endif%}
+      </tbody>
+    </table>
+
+    <form action="/borrarEdges">
+      <input type="submit" class="btn btn-primary" value="Borrar Todo" >
+    </form>
+  </div>
+</body>
+</html>

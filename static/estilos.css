@@ -1,0 +1,11 @@
+body {
+    font: 10pt arial;
+    background-color: #b4b4b4;
+  }
+  #mynetwork {
+    width: 800px;
+    height: 800px;
+    border: 1px solid lightgray;
+    background-color: #333333;
+  }
+  

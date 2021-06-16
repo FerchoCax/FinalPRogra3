@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <title>Presentacion</title>
+
+  <nav class="navbar navbar-dark bg-dark">
+    
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link" href="/Home">  Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Crear">  Crear</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Unir">  Unir Nodos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="/Lista">Lista Nodos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/VerDiapositiva">Iniciar Presentacion</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  href="/VerMatris">Matriz</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/UsarVis">Estructura</a>
+          </li>
+          
+  
+</nav>
+        
+</head>
+<body>
+  <br>
+  <aside style=" width: 10%; float:left; height: 600px; background: rgb(255, 255, 255);;"> 
+    {%if sigue%}
+    {%if sigue == -1%}
+    <p style="margin-left: 20%; margin-right: auto; margin-top:290px; margin-bottom: auto;">No hay diapositiva siguiente</p>
+    {%else%}
+    <a href="/Siguiente/{{sigue}}" > <button class="btn btn-danger" style="margin-left: 20%; margin-right: 20%; margin-top:290px; margin-bottom: auto;">Siguiente</button></a>
+    {%endif%}
+    {%endif%}
+  </aside>
+  <aside style=" width: 10%; float:right; height: 600px; background: rgb(255, 255, 255);">
+    <br>
+    <div>
+  
+    {%if AnteriorDiapo%}
+    {%if AnteriorDiapo == -1%}
+    <p style="margin-left: 20%; margin-right: 5%; margin-top:290px; margin-bottom: auto;">No hay diapositiva Anterior</p>
+    {%else%}
+    
+    <a href="/Anterior/{{AnteriorDiapo}}"> <button class="btn btn-danger" style=" margin-left: 20%; margin-right: 5%; margin-top:290px; margin-bottom: auto;">Atras</button></a>
+    {%endif%}
+    {%endif%}
+  </div>
+  </aside>
+    {%if nohay%}
+    <div  id="content1" style="background-image: url({{fondo}});">
+        <h1>Aun no se ha creado ninguna diapositiva</h1> 
+    
+    </div>
+    {%else%}
+    <div  id="content1" style="background-image: url({{fondo}});  width: 80%; height: 600px;   margin: 0px auto;">
+        {%if fondo%}
+        <img class="FondoImg" src="{{ url_for('static', filename=fondo) }}" style="width: 100%; height: 100%;  position: relative;      z-index: -1000;" alt="Fondo">
+        
+        {%endif%}
+        {%if titulo%}
+        <h1 class="titulo" style="position: relative;   z-index: 10; bottom: 99%; height: 0px; color: rgb(148,148,148);">{{titulo}}</h1>
+        {%if texto%}
+        <p class="texto" style=" position: relative; z-index: 10; bottom: 80%; height: 0px; color: rgb(148, 148, 148);">{{texto}}</p>
+        {%endif%}
+        {%endif%}
+        {%if imagen%}
+        <img class="ImagenDiapo" src="{{ url_for('static', filename=imagen) }}"  style="width: 35%; height: 35%; position: relative; z-index: 8;bottom: 45%;left: 55%;" alt="">
+        {%endif%}   
+    
+    </div>
+    
+    
+    {%endif%}
+    
+</body>
+</html>

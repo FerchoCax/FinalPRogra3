@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" >
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+    <title>Lista De Diapositivas</title>
+
+  <nav class="navbar navbar-dark bg-dark">
+    
+    <ul class="nav nav-pills nav-fill">
+      <li class="nav-item">
+        <a class="nav-link" href="/Home"> Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Crear"> Crear</a>
+      </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/Unir">  Unir Nodos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"  href="/Lista">Lista Nodos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/VerDiapositiva">Iniciar Presentacion</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"  href="/VerMatris">Matriz</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/UsarVis">Estructura</a>
+          </li>
+          
+  
+</nav>
+        
+</head>
+<body>
+  <div class="container">
+  <br>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Editar Informacion</td>
+            </tr>
+        </thead>
+        <tbody>
+            {%if data%}
+            {%for nodo in data%}
+                <tr>
+                    <td>{{nodo}}</td>
+                    <td><form action="/EditarInfo" method="POST">
+                        <input type="text" name="nodoaenviar" id="" value="{{nodo}}" hidden>
+                        <input type="submit"  class="btn btn-secondary"></form></td>
+                </tr>
+            {%endfor%}
+            {%else%}
+            <tr><td>No hay nodos</td> <td></td></tr>
+            {%endif%}
+        </tbody>
+    </table>
+    <form action="/borrar">
+    <input type="submit"  class="btn btn-secondary" value="Borrar Todas las diapositivas">
+    </form>
+  </div>
+</body>
+</html>
